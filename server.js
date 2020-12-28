@@ -106,7 +106,7 @@ io.sockets.on('connection', socket => {
                   .to(user.id)
                   .emit(
                     'action',
-                    formatMessage('backend', `${ctx.event}`)
+                    formatMessage('backend', json({ ...ctx }))
                   );
         
                   res.status(200).json({ success: true, ...ctx })
