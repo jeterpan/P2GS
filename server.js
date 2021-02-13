@@ -18,8 +18,6 @@ const myEmitter = new EventEmitter()
 
 const app = express();
 
-app.use(jsonParser)
-
 const server = new https.createServer({
   cert: fs.readFileSync('./ssl/cert.pem'),
   key: fs.readFileSync('./ssl/privkey.pem')
@@ -45,14 +43,6 @@ app.post('/api/global', function (req, res) {
 
   myEmitter.emit('msgFromGod', ctxparam, res)
 
-})
-
-app.post('/api/body', function (req, res) {
-
-  const ctxparam = req.body
-
-  myEmitter.emit('msgFromGod', ctxparam, res)
-  
 })
 
 const botName = 'P2GS Websocket Server';
@@ -116,7 +106,7 @@ io.sockets.on('connection', socket => {
                   .to(user.id)
                   .emit(
                     'action',
-                    formatMessage( 'backend', JSON.stringify({ ...ctx }) )
+                    formatMessage('backend', JSON.stringify({ ...ctx }))
                   );
         
                   res.status(200).json({ success: true, ...ctx })
@@ -135,7 +125,7 @@ io.sockets.on('connection', socket => {
               .to(ctx.room)
               .emit(
                 'action',
-                formatMessage('backend', JSON.stringify({ ...ctx }) )
+                formatMessage('backend', `${ctx.event}`)
               );
     
               res.status(200).json({ success: true, ...ctx })
