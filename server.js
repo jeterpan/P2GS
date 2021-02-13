@@ -19,8 +19,8 @@ const myEmitter = new EventEmitter()
 const app = express();
 
 const server = new https.createServer({
-  cert: fs.readFileSync('./ssl/cert.pem'),
-  key: fs.readFileSync('./ssl/privkey.pem')
+  cert: fs.readFileSync('/etc/letsencrypt/live/gather2poker.com.br-0001/cert.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/gather2poker.com.br-0001/privkey.pem')
 }, app);
 
 const PORT = process.env.PORT || 443;
